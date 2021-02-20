@@ -12,6 +12,7 @@ keywords = ["template", "python", "templyte"]
 [tool.poetry.dependencies]
 python = "^3.7"
 click = "^7.1.2"
+requests = "^2.25.1"
 
 [tool.poetry.dev-dependencies]
 

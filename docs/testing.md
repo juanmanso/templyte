@@ -58,7 +58,10 @@ def test_main_succeeds(runner):
 ```
 
 The logic for the runner is extracted to a _test fixture_ because it will be
-needed in most test cases inside the module.
+needed in most test cases inside the module. For instance, using the fixture on
+a different test file on the same module will work, regardless if it is on one
+file or the other. It is a good practice to extract them to a `conftest.py`
+file for implicit import on test files/modules.
 [PyTest's test fixtures](https://docs.pytest.org/en/latest/fixture.html) offer
 explicit, modular and scalable initializations for test functions.
 

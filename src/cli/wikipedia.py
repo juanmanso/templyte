@@ -5,6 +5,7 @@ import requests
 # TODO: detect user's language using `locale`
 API_URL = "https://{language}.wikipedia.org/api/rest_v1/page/random/summary"
 
+
 def random_page(language="en"):
     url = API_URL.format(language=language)
 
@@ -15,4 +16,3 @@ def random_page(language="en"):
     except requests.RequestException as error:
         message = str(error)
         raise click.ClickException(message)
-

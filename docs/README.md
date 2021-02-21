@@ -7,4 +7,5 @@ Documentation of Python Template repository
 - [Setup of local environment](./setup.md)
 - [Python versioning](./py_versioning.md)
 - [Repository layout](./repo_layout.md)
+- [Testing with pytest and nox](./testing.md)
 

@@ -1,6 +1,8 @@
 import pytest
 import click
 
+def pytest_configure(config):
+    config.addinivalue_line("markers", "e2e: mark as end-to-end test.")
 
 mock_response = {
     "title": "Lorem Ipsum",

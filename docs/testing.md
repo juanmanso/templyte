@@ -3,6 +3,7 @@
 <!-- toc -->
 - [Unit testing](#unit-testing)
 - [Adding code coverage to pytest](#adding-code-coverage-to-pytest)
+- [Automating tests with Nox](#automating-tests-with-nox)
 <!-- end-toc -->
 
 ## Unit testing
@@ -58,10 +59,10 @@ def test_main_succeeds(runner):
 
 The logic for the runner is extracted to a _test fixture_ because it will be
 needed in most test cases inside the module.
-[Pytest's test fixtures](https://docs.pytest.org/en/latest/fixture.html) offer
+[PyTest's test fixtures](https://docs.pytest.org/en/latest/fixture.html) offer
 explicit, modular and scalable initializations for test functions.
 
-To run tests, we must invoke `pytest`. Using `poetry` we simply type:
+To run tests, we must invoke PyTest. Using Poetry we simply type:
 
 ```bash
 poetry run pytest
@@ -96,7 +97,41 @@ TOTAL                    16      0      0      0   100%
 
 Required test coverage of 85.0% reached. Total coverage: 100.00%
 
-================================= 1 passed in 27.36s =================================
+================================= 1 passed in 2.73s =================================
 ```
 
+## Automating tests with Nox
 
+[Nox](https://nox.thea.codes/) is a package related to
+[tox](https://tox.readthedocs.io/), useful for automating testing in multiple
+versions of Python in isolated environments. To configure Nox, we create a
+`noxfile.py` as shown below.
+
+```python
+# noxfile.py
+import nox
+
+
+@nox.session(python=["3.8", "3.7"])
+def tests(session):
+    args = session.posargs or ["--cov"]
+    session.run("poetry", "install", external=True)
+    session.run("pytest", *args)
+```
+
+In there, we define a session (`tests`) that install dependencies and run the
+actual test suite. Since Poetry is not part of the environment created by Nox,
+we need to flag it as `external`.
+
+On each invocation of Nox, it recreates the environments from scrach, but if we
+add the `-r` flag, it will reuse the existing ones.
+
+Lastly, the `session.posargs` associated with the variable `args`, enables
+receiving command line arguments to alter the `pytest` command. As a default,
+we leave the `--cov` argument, but it can be overwritten by doing:
+
+```
+nox -- tests/cli/test_console.py
+```
+
+This command will run the console tests but it will not print the coverage.

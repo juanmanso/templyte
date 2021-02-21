@@ -48,7 +48,7 @@ To do that, we simply head to the `pyproject.toml` file and change this
 
 ```toml
 [tool.poetry.dependencies]
-python = "^<python_version"
+python = "^<python_version>"
 ```
 
 By using the caret char (`^`), we state that our package (repo) will work

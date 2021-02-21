@@ -18,9 +18,13 @@ requests = "^2.25.1"
 pytest = "^6.2.2"
 pytest-cov = "^2.11.1"
 coverage = "^5.4"
+pytest-mock = "^3.5.1"
 
 [tool.poetry.scripts]
 cli = "cli.console:main"
+
+[tool.pytest.ini_options]
+addopts = "-rA --cov"
 
 [tool.coverage.paths]
 source = ["src", "*/site-packages"]

@@ -8,4 +8,4 @@ Documentation of Python Template repository
 - [Python versioning](./py_versioning.md)
 - [Repository layout](./repo_layout.md)
 - [Testing with pytest and nox](./testing.md)
-
+- [Code analysis and pre-commit hooks](./ca_and_pre_commit.md)

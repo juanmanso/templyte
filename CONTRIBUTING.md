@@ -94,7 +94,7 @@ Spikes must be placed inside the `/spikes` folder. Every spike must have its
 <br>
 <br>
 
-## Version Control 
+## Version Control
 
 ### Branch Names
 
@@ -159,8 +159,8 @@ Commit messages must comply with the following rules:
 2. Message must be lowercase
 3. Message must not end with a period
 4. Message must have the following structure: **type: [category] description**
-  
-**Category** 
+
+**Category**
 
 The category identifies the EPIC user story to which the change introduced in
  the commit is associated. In short, the overall topic of the feature it is
@@ -193,7 +193,7 @@ git commit -m "style: [login] update login view to apply styling"
 
 #### Title
 
-The pull request title must have the following structure: 
+The pull request title must have the following structure:
 
 `{SCOPE} {USER-STORY-TITLE} | {USER-STORY-ID}`
 

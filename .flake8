@@ -5,5 +5,4 @@ per-file-ignores = tests/*:S101
 application-import-names = cli, tests
 import-order-style = google
 max-complexity = 10
-max-line-length = 80
-
+max-line-length = 88

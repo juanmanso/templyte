@@ -1,3 +1,5 @@
+default_stages: [commit]
+fail_fast: false
 repos:
 -   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v2.3.0
@@ -7,12 +9,13 @@ repos:
     -   id: trailing-whitespace
 -   repo: local
     hooks:
-    # -   id: gitlint
-    #     name: gitlint
-    #     entry: poetry run gitlint
-    #     pass_filenames: false
-    #     language: system
-    #     types: [python]
+    -   id: gitlint
+        name: gitlint
+        entry: poetry run gitlint -C gitlint/.gitlint --msg-filename .git/COMMIT_EDITMSG
+        pass_filenames: false
+        language: system
+        always_run: true
+        stages: [commit-msg]
     -   id: black
         name: black
         entry: poetry run black

@@ -8,6 +8,7 @@
 - [Running everything together with Nox](#running-everything-together-with-nox)
 - [Pre-commit and hooks](#pre-commit-and-hooks)
     - [Setting up pre-commit hooks](#setting-up-pre-commit-hooks)
+    - [Gitlint for commit-msg hook](#gitlint-for-commit-msg-hook)
 <!-- end-toc -->
 
 ## Overview
@@ -235,3 +236,68 @@ Another important thing is to set `pass_filenames: false` to [disable per file
 checks](https://stackoverflow.com/a/57233175). In particular, we are interested
 in this because we are setting a coverage floor to our code. If we were to run
 tests separately, coverage may be reduced unfairly.
+
+### Gitlint for commit-msg hook
+
+Lastly, to keep the repo clean and consistent, we want to lint commit messages.
+You may be thinking... really? Checking commit messages?
+
+Well, there is actually value in consistent commit messages. For starters, it
+helps to carry a methodology along the history of the repo and, if new devs
+were to be on-boarded, they would have a better time reading through commits
+and figure out what is going on and where.
+
+Then, something interesting can happen if we guarantee consistent commit
+messages: we can automate reports of the progress and status of our projects!
+
+Take a look at [ohmyzsh](https://github.com/ohmyzsh/ohmyzsh). When updated, it
+shows a beautiful changelog report.
+
+![ohmyzsh changelog screenshot](https://res.cloudinary.com/practicaldev/image/fetch/s--KVroLuwO--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://dev-to-uploads.s3.amazonaws.com/i/hue3uxw462xm9o1yp7q7.png)
+
+Well, the thing is that these reports are [based on the format of commit
+messages](https://github.com/ohmyzsh/ohmyzsh/blob/master/tools/changelog.sh)!
+🤯
+
+Now that we have understood the value of good formatted commit messages, let's
+dive into the implementation. For linting these, we use
+[gitlint](https://jorisroovers.com/gitlint/) which is a python library that
+handles the burden for us.
+
+Now, we simply add it with this code block:
+
+```yaml
+-   repo: https://github.com/jorisroovers/gitlint
+    rev: v0.15.0
+    hooks:
+    -   id: gitlint
+```
+
+Since we are using Poetry to manage dependencies, we perform the check through
+Poetry itself by doing:
+
+```yaml
+-   repo: local
+    hooks:
+    -   id: gitlint
+        name: gitlint
+        entry: poetry run gitlint -C gitlint/.gitlint --msg-filename .git/COMMIT_EDITMSG
+        pass_filenames: false
+        language: system
+        always_run: true
+        stages: [commit-msg]
+```
+
+As we can see above, we need to determine the rules for gitlint. This is done
+on the `.gitlint` configuration file placed on the root which will be
+automatically be picked by gitlint.
+
+Finally, to actually add it to our pre-commit routine, we need first to
+install the `commit-msg` hook since it is not installed by default (on
+`pre-commit install`):
+
+```bash
+pre-commit install --hook-type commit-msg
+```
+
+<!-- TODO: Automate setup of pre-commit hooks -->

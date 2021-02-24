@@ -1,5 +1,7 @@
 # Python Template Repository
 
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
+
 ## Requirements
 
 For this project to work, we need to have the following installed:

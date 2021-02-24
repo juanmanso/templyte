@@ -27,6 +27,7 @@ flake8-bugbear = "^20.11.1"
 flake8-import-order = "^0.18.1"
 safety = "^1.10.3"
 nox = "^2020.12.31"
+gitlint = "^0.15.0"
 
 [tool.poetry.scripts]
 cli = "cli.console:main"

@@ -24,7 +24,7 @@ def install_with_constraints(session, *args, **kwargs):
 
 @nox.session(python=["3.8", "3.7"])
 def tests(session):
-    args = session.posargs or ["--cov", "-m", "not e2e"]
+    args = [*session.posargs, "--cov-fail-under=0"] or ["--cov", "-m", "not e2e"]
     session.run("poetry", "install", "--no-dev", external=True)
     install_with_constraints(session, "coverage", "pytest", "pytest-cov", "pytest-mock")
     session.run("pytest", *args)

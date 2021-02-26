@@ -60,7 +60,7 @@ class TitleFormat(LineRule):
         + "|".join(valid_types)
         + r")(:)\s"
         + r"(\[(\w+-){0,}\w+\]){0,}"
-        + r"[a-zA-Z\d\-_\s]+$"
+        + r"[a-zA-Z\d\'\-_\s]+$"
     )
 
     def validate(self, line, _commit):

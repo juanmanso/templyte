@@ -2,8 +2,8 @@ import tempfile
 
 import nox
 
+package = "cli"
 nox.options.sessions = "lint", "mypy", "pytype", "safety", "tests"
-
 locations = "src", "tests", "noxfile.py"
 
 
@@ -63,6 +63,17 @@ def pytype(session):
     args = session.posargs or ["--disable=import-error", *locations]
     install_with_constraints(session, "pytype")
     session.run("pytype", *args)
+
+
+@nox.session(python=["3.8", "3.7"])
+def typeguard(session):
+    args = session.posargs or ["-m", "not e2e"]
+    print(args)
+    session.run("poetry", "install", "--no-dev", external=True)
+    install_with_constraints(
+        session, "pytest", "pytest-cov", "pytest-mock", "typeguard"
+    )
+    session.run("pytest", f"--typeguard-packages={package}", *args)
 
 
 # TODO: check python-afl for security checks

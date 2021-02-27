@@ -1,3 +1,4 @@
+"""Package-wide test fixtures."""
 from unittest.mock import Mock
 
 from _pytest.config import Config
@@ -7,6 +8,7 @@ from pytest_mock import MockFixture
 
 
 def pytest_configure(config: Config) -> None:
+    """Pytest configuration hook."""
     config.addinivalue_line("markers", "e2e: mark as end-to-end test.")
 
 
@@ -15,16 +17,19 @@ mock_response = {
     "extract": "Lorem ipsum dolor sit amet",
 }
 
+
 """ Setting up tests with fixtures """
 
 
 @pytest.fixture
 def runner() -> CliRunner:
+    """Fixture for invoking command-line interfaces."""
     return CliRunner()
 
 
 @pytest.fixture
 def mock_requests_get(mocker: MockFixture) -> Mock:
+    """Fixture for mocking requests.get."""
     mock = mocker.patch("requests.get")
     mock.return_value.__enter__.return_value.json.return_value = mock_response
     return mock
@@ -32,4 +37,5 @@ def mock_requests_get(mocker: MockFixture) -> Mock:
 
 @pytest.fixture
 def mock_wikipedia_random_page(mocker: MockFixture) -> Mock:
+    """Fixture for mocking wikipedia.random_page."""
     return mocker.patch("cli.wikipedia.random_page")

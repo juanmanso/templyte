@@ -1,3 +1,4 @@
+"""Nox sessions."""
 import tempfile
 from typing import Any
 
@@ -11,6 +12,7 @@ locations = "src", "tests", "noxfile.py"
 
 # session.install wrapper to use Poetry's lock file constraints
 def install_with_constraints(session: Session, *args: str, **kwargs: Any) -> None:
+    """Install packages determined by Poetry's lock file."""
     with tempfile.NamedTemporaryFile() as requirements:
         session.run(
             "poetry",
@@ -26,6 +28,7 @@ def install_with_constraints(session: Session, *args: str, **kwargs: Any) -> Non
 
 @nox.session(python="3.8")
 def black(session: Session) -> None:
+    """Run black code formatter."""
     args = session.posargs or locations
     install_with_constraints(session, "black")
     session.run("black", *args)
@@ -33,6 +36,7 @@ def black(session: Session) -> None:
 
 @nox.session(python=["3.8", "3.7"])
 def lint(session: Session) -> None:
+    """Lint using flake8."""
     args = session.posargs or locations
     install_with_constraints(
         session,
@@ -41,7 +45,9 @@ def lint(session: Session) -> None:
         "flake8-bandit",
         "flake8-black",
         "flake8-bugbear",
+        "flake8-docstrings",
         "flake8-import-order",
+        "darglint",
     )
     session.run("flake8", *args)
 
@@ -49,6 +55,7 @@ def lint(session: Session) -> None:
 # TODO: check python-afl for security checks
 @nox.session(python="3.8")
 def safety(session: Session) -> None:
+    """Scan dependencies for insecure packages."""
     with tempfile.NamedTemporaryFile() as requirements:
         session.run(
             "poetry",
@@ -65,6 +72,7 @@ def safety(session: Session) -> None:
 
 @nox.session(python=["3.8", "3.7"])
 def mypy(session: Session) -> None:
+    """Type-check using mypy."""
     args = session.posargs or locations
     install_with_constraints(session, "mypy")
     session.run("mypy", *args)
@@ -72,6 +80,7 @@ def mypy(session: Session) -> None:
 
 @nox.session(python="3.7")
 def pytype(session: Session) -> None:
+    """Type-check using pytype."""
     args = session.posargs or ["--disable=import-error", *locations]
     install_with_constraints(session, "pytype")
     session.run("pytype", *args)
@@ -79,6 +88,7 @@ def pytype(session: Session) -> None:
 
 @nox.session(python=["3.8", "3.7"])
 def tests(session: Session) -> None:
+    """Run pytest test suite."""
     args = [*session.posargs, "--cov-fail-under=0"] or ["--cov", "-m", "not e2e"]
     session.run("poetry", "install", "--no-dev", external=True)
     install_with_constraints(session, "coverage", "pytest", "pytest-cov", "pytest-mock")
@@ -87,6 +97,7 @@ def tests(session: Session) -> None:
 
 @nox.session(python=["3.8", "3.7"])
 def typeguard(session: Session) -> None:
+    """Runtime type checking using typeguard."""
     args = session.posargs or ["-m", "not e2e"]
     print(args)
     session.run("poetry", "install", "--no-dev", external=True)

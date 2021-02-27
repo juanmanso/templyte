@@ -34,6 +34,8 @@ mypy = "^0.812"
 pytype = {version = "^2021.2.23", python = "3.7"}
 typeguard = "^2.11.1"
 flake8-annotations = "^2.5.0"
+flake8-docstrings = "^1.5.0"
+darglint = "^1.7.0"
 
 [tool.poetry.scripts]
 cli = "cli.console:main"

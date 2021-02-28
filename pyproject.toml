@@ -38,6 +38,8 @@ flake8-docstrings = "^1.5.0"
 darglint = "^1.7.0"
 xdoctest = "^0.15.4"
 Pygments = "^2.8.0"
+Sphinx = "^3.5.1"
+sphinx-autodoc-typehints = "^1.11.1"
 
 [tool.poetry.scripts]
 cli = "cli.console:main"

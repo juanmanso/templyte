@@ -49,7 +49,7 @@ its functionalities.
 To setup Flake8, a configuration file by the name `.flake8` is used. For
 instance, the current `.flake8` is as goes:
 
-```toml
+```dosini
 [flake8]
 select = B,B9,BLK,C,E,F,I,S,W
 ignore = E203,E501,W503

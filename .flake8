@@ -4,6 +4,7 @@ ignore = E203,E501,W503
 per-file-ignores =
     tests/*:S101
     gitlint/user-rules.py:ANN
+    docs/conf.py:ANN,D
 application-import-names = cli, tests
 docstring-convention = google
 import-order-style = google

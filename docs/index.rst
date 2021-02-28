@@ -10,6 +10,7 @@ Python Template Repository
 
    sphinx/license
    sphinx/source_reference
+   README.md
 
 The example project is heavily based on the
 `Hypermodern Python <https://medium.com/@cjolowicz/hypermodern-python-d44485d9d769>`_

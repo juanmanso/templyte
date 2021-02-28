@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+"""Rules for compliance of commit messages to the repo."""
 import re
 
 from gitlint.rules import CommitMessageTitle, CommitRule, LineRule, RuleViolation
@@ -18,8 +19,9 @@ valid_types = [
 
 
 class ContribType(CommitRule):
-    """
-    This rule enforces that each commit contains a valid type at the
+    """Type of the contribution.
+
+    Enforces that each commit contains a valid type at the
     beggining of the title.
     """
 
@@ -28,6 +30,7 @@ class ContribType(CommitRule):
     target = CommitMessageTitle
 
     def validate(self, commit):
+        """Validate function to be ran by pre-commit for ContribType()."""
         self.log.debug(
             """
             ContribType: title's prefix should match valid types.
@@ -46,8 +49,9 @@ class ContribType(CommitRule):
 
 
 class TitleFormat(LineRule):
-    """
-    This rule enforces the commit format stated at CONTRIBUTING.md
+    """Title's compliant format.
+
+    Enforces the commit format stated at CONTRIBUTING.md
     """
 
     name = "title-must-follow-valid-format"
@@ -60,10 +64,11 @@ class TitleFormat(LineRule):
         + "|".join(valid_types)
         + r")(:)\s"
         + r"(\[(\w+-){0,}\w+\]){0,}"
-        + r"[a-zA-Z\d\'\-_\s]+$"
+        + r"[a-zA-Z\d\,\'\-_\s]+$"
     )
 
     def validate(self, line, _commit):
+        """Validate function to be ran by pre-commit for TitleFormat()."""
         ef = self.expected_format
         self.log.debug("TitleFormat: title's format should be '" + ef + "'")
 

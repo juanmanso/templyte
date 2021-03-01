@@ -426,7 +426,7 @@ networkx = ">=2"
 name = "importlib-metadata"
 version = "3.7.0"
 description = "Read metadata from Python packages"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.6"
 
@@ -1067,7 +1067,7 @@ tests = ["pytest", "pytest-cov", "codecov", "scikit-build", "cmake", "ninja", "p
 name = "zipp"
 version = "3.4.0"
 description = "Backport of pathlib-compatible object wrapper for zip files"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.6"
 
@@ -1078,7 +1078,7 @@ testing = ["pytest (>=3.5,!=3.7.3)", "pytest-checkdocs (>=1.2.3)", "pytest-flake
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "1f7a2513638eb4d4c21a8c4fa32d2e480cb51994121a694ae8940044619713e7"
+content-hash = "262ef2770355a5787fafdbef7bf6597b4e7129fabb4f74076061d4cc4a6442a2"
 
 [metadata.files]
 alabaster = [

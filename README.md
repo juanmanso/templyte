@@ -1,7 +1,8 @@
 # Python Template Repository
 
-[![Continuous Integration](https://github.com/juanmanso/templyte/workflows/ci/badge.svg)](https://github.com/juanmanso/templyte/actions?workflow=ci)
+[![Continuous Integration](https://github.com/juanmanso/templyte/actions/workflows/ci.yml/badge.svg)](https://github.com/juanmanso/templyte/actions/workflows/ci.yml)
 [![Codecov](https://codecov.io/gh/juanmanso/templyte/branch/main/graph/badge.svg)](https://codecov.io/gh/juanmanso/templyte)
+[![Read the Docs](https://readthedocs.org/projects/templyte/badge/)](https://templyte.readthedocs.io/)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 
 ## Requirements

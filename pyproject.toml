@@ -5,6 +5,7 @@ description = "CLI package for Python's Boilerplate Project"
 authors = ["Juan Manso <juanmanso@gmail.com>"]
 license = "GNU GPLv3"
 readme = "README.md"
+documentation = "https://templyte.readthedocs.io"
 homepage = "https://github.com/juanmanso/templyte"
 repository = "https://github.com/juanmanso/templyte"
 keywords = ["template", "python", "templyte"]
@@ -38,14 +39,17 @@ flake8-annotations = "^2.5.0"
 flake8-docstrings = "^1.5.0"
 darglint = "^1.7.0"
 xdoctest = "^0.15.4"
-Pygments = "^2.8.0"
-Sphinx = "^3.5.1"
+pygments = "^2.8.0"
+sphinx = "^3.5.1"
 sphinx-autodoc-typehints = "^1.11.1"
 recommonmark = "^0.7.1"
 codecov = "^2.1.11"
 
 [tool.poetry.scripts]
 cli = "cli.console:main"
+
+[tool.poetry.extras]
+docs = ["sphinx", "sphinx-autodoc-typehints", "recommonmark"]
 
 [tool.pytest.ini_options]
 addopts = "-rA --cov -m 'not e2e'"

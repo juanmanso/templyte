@@ -41,6 +41,7 @@ Pygments = "^2.8.0"
 Sphinx = "^3.5.1"
 sphinx-autodoc-typehints = "^1.11.1"
 recommonmark = "^0.7.1"
+codecov = "^2.1.11"
 
 [tool.poetry.scripts]
 cli = "cli.console:main"

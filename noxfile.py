@@ -124,3 +124,11 @@ def docs(session: Session) -> None:
         session, "sphinx", "sphinx-autodoc-typehints", "recommonmark"
     )
     session.run("sphinx-build", "docs", "docs/_build")
+
+
+@nox.session(python="3.8")
+def coverage(session: Session) -> None:
+    """Upload coverage data to codecov."""
+    install_with_constraints(session, "coverage", "codecov")
+    session.run("coverage", "xml", "--fail-under=0")
+    session.run("codecov", *session.posargs)

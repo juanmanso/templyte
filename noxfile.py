@@ -7,7 +7,7 @@ from nox.sessions import Session
 
 package = "cli"
 nox.options.sessions = "lint", "mypy", "pytype", "safety", "tests"
-locations = "src", "tests", "noxfile.py", "docs/conf.py"
+locations = "src", "tests", "noxfile.py"
 
 
 # session.install wrapper to use Poetry's lock file constraints
@@ -129,6 +129,6 @@ def docs(session: Session) -> None:
 @nox.session(python="3.8")
 def coverage(session: Session) -> None:
     """Upload coverage data to codecov."""
-    install_with_constraints(session, "coverage", "codecov")
+    install_with_constraints(session, "coverage[toml]", "codecov")
     session.run("coverage", "xml", "--fail-under=0")
     session.run("codecov", *session.posargs)
